@@ -15,6 +15,7 @@ const GameSection = () => {
       3, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 2,
       0, 0, 1, 0, 0, 0,
     ]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const _Cells = (indexOfArray, value, box, indx) => {
@@ -22,32 +23,33 @@ const GameSection = () => {
       return (
         <td
           key={indx}
-          className={cellSelected === indexOfArray ? 'selected-box' : box}
+          className={`game__cell ${
+            cellSelected === indexOfArray ? 'selected-box' : box
+          }`}
           onClick={() => setCellSelected(indexOfArray)}
         ></td>
       );
     }
     return (
-      <td key={indx} className={box}>
-        {' '}
+      <td key={indx} className={`game__cell ${box}`}>
         {value}
       </td>
     );
   };
   return (
     <section className="game">
-      <table className="game-board">
+      <table className="game__board">
         <tbody>
           {rows.map((row) => {
             return (
-              <tr className="game-row" key={row}>
+              <tr className="game__row" key={row}>
                 {rows.map((column, indx) => {
                   const indexOfArray = row * 9 + indx;
                   const value = initArray[indexOfArray];
                   if (value === 0) {
-                    return _Cells(indexOfArray, value, 'filled-box', indx);
+                    return _Cells(indexOfArray, value, 'blank-box', indx);
                   }
-                  return _Cells(indexOfArray, value, 'blank-box', indx);
+                  return _Cells(indexOfArray, value, 'filled-box', indx);
                 })}
               </tr>
             );
