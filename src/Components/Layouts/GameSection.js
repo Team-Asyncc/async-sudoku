@@ -16,8 +16,9 @@ const GameSection = () => {
   const rows = [0, 1, 2, 3, 4, 5, 6, 7, 8];
 
   const handleOnCellSelected = (indexOfArray) => {
+    if (gameArray[indexOfArray] === 0) setNumberSelected(-1);
+    else setNumberSelected(gameArray[indexOfArray]);
     setCellSelected(indexOfArray);
-    setNumberSelected(-1);
   };
 
   const getClassName = (indexOfArray, value, highlight) => {
@@ -51,16 +52,22 @@ const GameSection = () => {
   };
 
   const unselectedCell = (indexOfArray, value) => {
-    let className = 'game__cell';
+    let rowHighlight =
+      indexOfArray % 9 === cellSelected % 9 ? 'box-highlight' : '';
+    let colHighlight =
+      Math.floor(indexOfArray / 9) === Math.floor(cellSelected / 9)
+        ? 'box-highlight'
+        : '';
+    let className = `game__cell ${rowHighlight} ${colHighlight}`;
     let numberColor = 'wrong--number';
     if (ansArray[indexOfArray] === gameArray[indexOfArray]) {
       numberColor = 'correct--number';
     }
     if (value !== 0) {
       if (initArray[indexOfArray] === 0) {
-        className = `game__cell game__cell--userfilled ${numberColor}`;
+        className = `game__cell game__cell--userfilled ${numberColor} ${rowHighlight} ${colHighlight}`;
       } else {
-        className = 'game__cell game__cell--filled';
+        className = `game__cell game__cell--filled ${rowHighlight} ${colHighlight}`;
       }
     }
 
@@ -74,27 +81,6 @@ const GameSection = () => {
       </td>
     );
   };
-
-  // const _Cells = (indexOfArray, value, box, indx) => {
-  //   if (editable[indexOfArray]) {
-  //     return (
-  //       <td
-  //         key={indx}
-  //         className={`game__cell game__cell ${
-  //           cellSelected === indexOfArray ? 'selected-box' : box
-  //         }`}
-  //         onClick={() => setCellSelected(indexOfArray)}
-  //       >
-  //         {value === 0 ? ' ' : value}
-  //       </td>
-  //     );
-  //   }
-  //   return (
-  //     <td key={indx} className={`game__cell ${box}`}>
-  //       {value}
-  //     </td>
-  //   );
-  // };
 
   return (
     <section className="game">

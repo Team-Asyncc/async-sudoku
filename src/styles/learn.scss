@@ -11,16 +11,22 @@
   }
 }
 
-.content {
+.content-container {
   margin-top: 40px;
-
   .heading {
     padding: 20px 30px;
     background-color: #f3f6fa;
     font-weight: 700;
   }
+  .content {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
 
-  p {
-    padding: 1rem 0;
+    p {
+      padding: 1rem 0;
+    }
+    img {
+      width: 300px;
+    }
   }
 }
