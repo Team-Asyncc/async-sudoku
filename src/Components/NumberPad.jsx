@@ -6,7 +6,6 @@ const NumberPad = () => {
   let {
     numberSelected,
     cellSelected,
-    setInitArray,
     initArray,
     gameArray,
     setGameArray,

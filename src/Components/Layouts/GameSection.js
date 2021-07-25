@@ -1,8 +1,6 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useSudokuContext } from '../../context/SudokuContext';
 import '../../styles/game.scss';
-
-import { getQueAns } from '../../Utils/GetQueAns';
 
 const GameSection = () => {
   const {
