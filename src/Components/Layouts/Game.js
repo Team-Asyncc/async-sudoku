@@ -26,7 +26,6 @@ const Game = () => {
 
   return (
     <div className="container">
-      <header>Sudoku💥</header>
       <div className="innercontainer">
         <GameSection ansArray={ansArray} />
         <NumberPad />

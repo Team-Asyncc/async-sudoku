@@ -2,6 +2,8 @@ import React from 'react';
 import { useSudokuContext } from '../context/SudokuContext';
 import '../styles/numberpad.scss';
 
+import { icons } from '../Utils/getIcons';
+
 const NumberPad = () => {
   let {
     numberSelected,
@@ -23,24 +25,32 @@ const NumberPad = () => {
     });
   };
   return (
-    <div className="status__numbers">
-      {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((number) => {
-        return (
-          <div
-            className={
-              numberSelected === number
-                ? 'status__number status__number--selected'
-                : 'status__number'
-            }
-            key={number}
-            onClick={() => onClickNumber(number)}
-            // onMouseDown={() => setNumberSelected(number)}
-            // onMouseUp={() => setNumberSelected(-1)}
-          >
-            {number}
-          </div>
-        );
-      })}
+    <div className="controls__container">
+      <button className="controls__btn">New Game</button>
+      <div className="controls__icons">
+        <img src={icons.back} height="40" width="40" alt="back" />
+        <img src={icons.cross} height="40" width="40" alt="back" />
+        <img src={icons.bulb} height="40" width="40" alt="back" />
+      </div>
+      <div className="status__numbers">
+        {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((number) => {
+          return (
+            <div
+              className={
+                numberSelected === number
+                  ? 'status__number status__number--selected'
+                  : 'status__number'
+              }
+              key={number}
+              onClick={() => onClickNumber(number)}
+              // onMouseDown={() => setNumberSelected(number)}
+              // onMouseUp={() => setNumberSelected(-1)}
+            >
+              {number}
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 };

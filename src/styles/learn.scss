@@ -1,0 +1,26 @@
+.learn__container {
+  max-width: 80ch;
+  margin: 20px auto;
+  font-family: 'Roboto', sans-serif;
+  color: #6e7c8c;
+  padding: 0 20px;
+
+  & > header {
+    font-size: 2rem;
+    text-align: center;
+  }
+}
+
+.content {
+  margin-top: 40px;
+
+  .heading {
+    padding: 20px 30px;
+    background-color: #f3f6fa;
+    font-weight: 700;
+  }
+
+  p {
+    padding: 1rem 0;
+  }
+}
