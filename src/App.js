@@ -5,7 +5,7 @@ import { SudokuProvider, useSudokuContext } from './context/SudokuContext';
 
 function App() {
   const state = useSudokuContext();
-  console.log(state);
+  // console.log(state);
   return (
     <SudokuProvider>
       <div className="App">
