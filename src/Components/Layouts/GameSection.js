@@ -1,11 +1,13 @@
 import React, { useEffect } from 'react';
-import { useSudokuContext } from '../context/SudokuContext';
-import './styles/game.scss';
+import { useSudokuContext } from '../../context/SudokuContext';
+import '../../styles/game.scss';
 
-const Game = () => {
+const GameSection = () => {
   const { cellSelected, setCellSelected, initArray, setInitArray } =
     useSudokuContext();
+
   const rows = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+
   useEffect(() => {
     setInitArray([
       7, 0, 0, 9, 0, 0, 2, 0, 8, 0, 0, 0, 0, 0, 8, 4, 0, 9, 0, 0, 0, 2, 4, 0, 1,
@@ -15,7 +17,6 @@ const Game = () => {
     ]);
   }, []);
 
-  // console.log('array', initArray);
   const _Cells = (indexOfArray, value, box, indx) => {
     if (value === 0) {
       return (
@@ -57,4 +58,4 @@ const Game = () => {
   );
 };
 
-export default Game;
+export default GameSection;

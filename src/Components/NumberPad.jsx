@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSudokuContext } from '../context/SudokuContext';
-import './styles/numberpad.scss';
+import '../styles/numberpad.scss';
+
 const NumberPad = () => {
   let { numberSelected, cellSelected, setInitArray, initArray } =
     useSudokuContext();
