@@ -8,18 +8,23 @@ const NumberPad = () => {
     cellSelected,
     setInitArray,
     initArray,
+    gameArray,
+    setGameArray,
     setNumberSelected,
   } = useSudokuContext();
 
   const onClickNumber = (numberCLicked) => {
-    setInitArray(() => {
-      const valu = [...initArray];
+    if (initArray[cellSelected] !== 0) return;
+
+    setNumberSelected(Number(numberCLicked));
+    setGameArray(() => {
+      const valu = [...gameArray];
       valu[cellSelected] = numberCLicked;
       return valu;
     });
   };
   return (
-    <div className="status__numbers" onMouseLeave={() => setNumberSelected(-1)}>
+    <div className="status__numbers">
       {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((number) => {
         return (
           <div
@@ -30,8 +35,8 @@ const NumberPad = () => {
             }
             key={number}
             onClick={() => onClickNumber(number)}
-            onMouseDown={() => setNumberSelected(number)}
-            onMouseUp={() => setNumberSelected(-1)}
+            // onMouseDown={() => setNumberSelected(number)}
+            // onMouseUp={() => setNumberSelected(-1)}
           >
             {number}
           </div>
