@@ -21,13 +21,14 @@ const Game = () => {
 
   useEffect(() => {
     startGame();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <div className="container">
       <header>Sudoku💥</header>
       <div className="innercontainer">
-        <GameSection />
+        <GameSection ansArray={ansArray} />
         <NumberPad />
       </div>
     </div>
