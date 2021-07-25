@@ -11,6 +11,8 @@ export const SudokuProvider = ({ children }) => {
   let [initArray, setInitArray] = useState([]);
   let [won, setWon] = useState(false);
   let [editable, setEditable] = useState([]);
+  let [answer, setAnswer] = useState('wrong');
+  let [ansArray, setAnsArray] = useState('wrong');
 
   return (
     <SudokuContext.Provider
@@ -31,6 +33,10 @@ export const SudokuProvider = ({ children }) => {
         setInitArray,
         won,
         setWon,
+        answer,
+        setAnswer,
+        ansArray,
+        setAnsArray,
       }}
     >
       {children}

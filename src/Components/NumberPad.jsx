@@ -12,11 +12,15 @@ const NumberPad = () => {
     gameArray,
     setGameArray,
     setNumberSelected,
+    ansArray,
+    setWon,
   } = useSudokuContext();
 
   const onClickNumber = (numberCLicked) => {
     if (initArray[cellSelected] !== 0) return;
-
+    if (_isSolved()) {
+      setWon(true);
+    }
     setNumberSelected(Number(numberCLicked));
     setGameArray(() => {
       const valu = [...gameArray];
@@ -24,6 +28,18 @@ const NumberPad = () => {
       return valu;
     });
   };
+
+  const _isSolved = () => {
+    if (
+      gameArray.every(
+        (cell, cellIndex) => ansArray[cellIndex] === gameArray[cellIndex]
+      )
+    ) {
+      return true;
+    }
+    return false;
+  };
+
   return (
     <div className="controls__container">
       <button className="controls__btn">New Game</button>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useSudokuContext } from '../../context/SudokuContext';
 import '../../styles/game.scss';
 
@@ -8,9 +8,7 @@ import NumberPad from '../NumberPad';
 import { getQueAns } from '../../Utils/GetQueAns';
 
 const Game = () => {
-  const { setInitArray, setGameArray } = useSudokuContext();
-
-  const [ansArray, setAnsArray] = useState([]);
+  const { setInitArray, setGameArray, setAnsArray } = useSudokuContext();
 
   const startGame = () => {
     const [quesArray, solvedArray] = getQueAns();
@@ -27,7 +25,7 @@ const Game = () => {
   return (
     <div className="container">
       <div className="innercontainer">
-        <GameSection ansArray={ansArray} />
+        <GameSection />
         <NumberPad />
       </div>
     </div>
