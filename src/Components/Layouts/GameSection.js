@@ -36,12 +36,16 @@ const GameSection = () => {
       return (
         <td
           key={indx}
-          className={`game__cell ${
+          className={`game__cell game__cell ${
             cellSelected === indexOfArray ? 'selected-box' : box
           }`}
           onClick={() => setCellSelected(indexOfArray)}
         >
+<<<<<<< HEAD
           {value === 0 ? ' ' : value}
+=======
+          {''}
+>>>>>>> 💄 add style to cell
         </td>
       );
     }
