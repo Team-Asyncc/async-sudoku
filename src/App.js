@@ -1,5 +1,6 @@
 import './App.scss';
 import Game from './Components/Game';
+import Ans from './Components/ans'
 import { SudokuProvider, useSudokuContext } from './context/SudokuContext';
 
 function App() {
@@ -10,7 +11,9 @@ function App() {
       <div className="App">
         <Game />
       </div>
+      <Ans/>
     </SudokuProvider>
+
   );
 }
 
