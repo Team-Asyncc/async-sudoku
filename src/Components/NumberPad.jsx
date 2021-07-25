@@ -3,40 +3,39 @@ import { useSudokuContext } from '../context/SudokuContext';
 import '../styles/numberpad.scss';
 
 const NumberPad = () => {
-  let { numberSelected, cellSelected, setInitArray, initArray } =
-    useSudokuContext();
+  let {
+    numberSelected,
+    cellSelected,
+    setInitArray,
+    initArray,
+    setNumberSelected,
+  } = useSudokuContext();
 
   const onClickNumber = (numberCLicked) => {
     setInitArray(() => {
       const valu = [...initArray];
-      valu[cellSelected] = parseInt(numberCLicked);
+      valu[cellSelected] = numberCLicked;
       return valu;
     });
   };
   return (
-    <div className="status__numbers">
+    <div className="status__numbers" onMouseLeave={() => setNumberSelected(-1)}>
       {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((number) => {
-        if (numberSelected === number.toString()) {
-          return (
-            <div
-              className="status__number status__number--selected"
-              key={number}
-              onClick={() => onClickNumber(number.toString())}
-            >
-              {number}
-            </div>
-          );
-        } else {
-          return (
-            <div
-              className="status__number"
-              key={number}
-              onClick={() => onClickNumber(number.toString())}
-            >
-              {number}
-            </div>
-          );
-        }
+        return (
+          <div
+            className={
+              numberSelected === number
+                ? 'status__number status__number--selected'
+                : 'status__number'
+            }
+            key={number}
+            onClick={() => onClickNumber(number)}
+            onMouseDown={() => setNumberSelected(number)}
+            onMouseUp={() => setNumberSelected(-1)}
+          >
+            {number}
+          </div>
+        );
       })}
     </div>
   );
