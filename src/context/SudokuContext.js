@@ -3,7 +3,7 @@ import React, { useContext, createContext, useState } from 'react';
 const SudokuContext = createContext({});
 
 export const SudokuProvider = ({ children }) => {
-  let [numberSelected, setNumberSelected] = useState('0');
+  let [numberSelected, setNumberSelected] = useState(-1);
   let [gameArray, setGameArray] = useState([]);
   let [difficulty, setDifficulty] = useState('Easy');
   let [timer, setTimer] = useState();

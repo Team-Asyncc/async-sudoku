@@ -2,38 +2,24 @@ import React, { useEffect } from 'react';
 import { useSudokuContext } from '../../context/SudokuContext';
 import '../../styles/game.scss';
 
+import { getQueAns } from '../../Utils/GetQueAns';
+
 const GameSection = () => {
   const {
     cellSelected,
     setCellSelected,
     initArray,
-    setInitArray,
-    editable,
-    setEditable,
     gameArray,
-    setGameArray,
     numberSelected,
+    setNumberSelected,
   } = useSudokuContext();
 
   const rows = [0, 1, 2, 3, 4, 5, 6, 7, 8];
 
-  useEffect(() => {
-    const problemArray = [
-      7, 0, 0, 9, 0, 0, 2, 0, 8, 0, 0, 0, 0, 0, 8, 4, 0, 9, 0, 0, 0, 2, 4, 0, 1,
-      3, 0, 0, 1, 0, 0, 0, 6, 0, 9, 0, 4, 0, 0, 0, 0, 0, 0, 1, 0, 8, 0, 0, 0, 0,
-      3, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 2,
-      0, 0, 1, 0, 0, 0,
-    ];
-    setInitArray(problemArray);
-    setGameArray(problemArray);
-    setEditable(() => {
-      return problemArray.map((item) => {
-        if (item === 0) return true;
-        return false;
-      });
-    });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const handleOnCellSelected = (indexOfArray) => {
+    setCellSelected(indexOfArray);
+    setNumberSelected(-1);
+  };
 
   const getClassName = (indexOfArray, value, highlight) => {
     if (value !== 0) {
@@ -54,7 +40,7 @@ const GameSection = () => {
       <td
         className={className}
         key={indexOfArray}
-        onClick={() => setCellSelected(indexOfArray)}
+        onClick={() => handleOnCellSelected(indexOfArray)}
       >
         {value}
       </td>
@@ -75,33 +61,33 @@ const GameSection = () => {
       <td
         className={className}
         key={indexOfArray}
-        onClick={() => setCellSelected(indexOfArray)}
+        onClick={() => handleOnCellSelected(indexOfArray)}
       >
         {value ? value : ''}
       </td>
     );
   };
 
-  const _Cells = (indexOfArray, value, box, indx) => {
-    if (editable[indexOfArray]) {
-      return (
-        <td
-          key={indx}
-          className={`game__cell game__cell ${
-            cellSelected === indexOfArray ? 'selected-box' : box
-          }`}
-          onClick={() => setCellSelected(indexOfArray)}
-        >
-          {value === 0 ? ' ' : value}
-        </td>
-      );
-    }
-    return (
-      <td key={indx} className={`game__cell ${box}`}>
-        {value}
-      </td>
-    );
-  };
+  // const _Cells = (indexOfArray, value, box, indx) => {
+  //   if (editable[indexOfArray]) {
+  //     return (
+  //       <td
+  //         key={indx}
+  //         className={`game__cell game__cell ${
+  //           cellSelected === indexOfArray ? 'selected-box' : box
+  //         }`}
+  //         onClick={() => setCellSelected(indexOfArray)}
+  //       >
+  //         {value === 0 ? ' ' : value}
+  //       </td>
+  //     );
+  //   }
+  //   return (
+  //     <td key={indx} className={`game__cell ${box}`}>
+  //       {value}
+  //     </td>
+  //   );
+  // };
 
   return (
     <section className="game">
