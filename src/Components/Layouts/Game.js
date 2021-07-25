@@ -8,9 +8,7 @@ import NumberPad from '../NumberPad';
 import { getQueAns } from '../../Utils/GetQueAns';
 
 const Game = () => {
-  const { setInitArray, setGameArray } = useSudokuContext();
-
-  const [ansArray, setAnsArray] = useState([]);
+  const { setInitArray, setGameArray, setAnsArray } = useSudokuContext();
 
   const startGame = () => {
     const [quesArray, solvedArray] = getQueAns();
@@ -28,7 +26,7 @@ const Game = () => {
     <div className="container">
       <header>Sudoku💥</header>
       <div className="innercontainer">
-        <GameSection ansArray={ansArray} />
+        <GameSection />
         <NumberPad />
       </div>
     </div>

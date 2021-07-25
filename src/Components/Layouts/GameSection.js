@@ -10,6 +10,7 @@ const GameSection = () => {
     gameArray,
     numberSelected,
     setNumberSelected,
+    ansArray,
   } = useSudokuContext();
 
   const rows = [0, 1, 2, 3, 4, 5, 6, 7, 8];
@@ -20,9 +21,13 @@ const GameSection = () => {
   };
 
   const getClassName = (indexOfArray, value, highlight) => {
+    let numberColor = 'wrong--number';
+    if (ansArray[indexOfArray] === gameArray[indexOfArray]) {
+      numberColor = 'correct--number';
+    }
     if (value !== 0) {
       if (initArray[indexOfArray] === 0) {
-        return `game__cell game__cell--userfilled game__cell--${highlight}selected`;
+        return `game__cell game__cell--userfilled game__cell--${highlight}selected ${numberColor}`;
       } else {
         return `game__cell game__cell--filled game__cell--${highlight}selected`;
       }
@@ -47,9 +52,13 @@ const GameSection = () => {
 
   const unselectedCell = (indexOfArray, value) => {
     let className = 'game__cell';
+    let numberColor = 'wrong--number';
+    if (ansArray[indexOfArray] === gameArray[indexOfArray]) {
+      numberColor = 'correct--number';
+    }
     if (value !== 0) {
       if (initArray[indexOfArray] === 0) {
-        className = 'game__cell game__cell--userfilled';
+        className = `game__cell game__cell--userfilled ${numberColor}`;
       } else {
         className = 'game__cell game__cell--filled';
       }
