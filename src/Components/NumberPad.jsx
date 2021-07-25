@@ -6,7 +6,6 @@ import { icons } from '../Utils/getIcons';
 
 const NumberPad = () => {
   let {
-    numberSelected,
     cellSelected,
     initArray,
     gameArray,
@@ -52,15 +51,9 @@ const NumberPad = () => {
         {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((number) => {
           return (
             <div
-              className={
-                numberSelected === number
-                  ? 'status__number status__number--selected'
-                  : 'status__number'
-              }
+              className="status__number"
               key={number}
               onClick={() => onClickNumber(number)}
-              // onMouseDown={() => setNumberSelected(number)}
-              // onMouseUp={() => setNumberSelected(-1)}
             >
               {number}
             </div>
