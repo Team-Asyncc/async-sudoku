@@ -1,0 +1,18 @@
+.game {
+  .game-board {
+    .game-row {
+      .filled-box {
+        padding: 1rem;
+
+        background-color: aqua;
+      }
+      .blank-box {
+        padding: 1rem;
+        background-color: blueviolet;
+      }
+      .selected-box {
+        background-color: brown;
+      }
+    }
+  }
+}
