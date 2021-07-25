@@ -10,6 +10,9 @@ const GameSection = () => {
     setInitArray,
     editable,
     setEditable,
+    gameArray,
+    setGameArray,
+    numberSelected,
   } = useSudokuContext();
 
   const rows = [0, 1, 2, 3, 4, 5, 6, 7, 8];
@@ -22,6 +25,7 @@ const GameSection = () => {
       0, 0, 1, 0, 0, 0,
     ];
     setInitArray(problemArray);
+    setGameArray(problemArray);
     setEditable(() => {
       return problemArray.map((item) => {
         if (item === 0) return true;
@@ -30,6 +34,53 @@ const GameSection = () => {
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const getClassName = (indexOfArray, value, highlight) => {
+    if (value !== 0) {
+      if (initArray[indexOfArray] === 0) {
+        return `game__cell game__cell--userfilled game__cell--${highlight}selected`;
+      } else {
+        return `game__cell game__cell--filled game__cell--${highlight}selected`;
+      }
+    } else {
+      return `game__cell game__cell--${highlight}selected`;
+    }
+  };
+
+  // Highlighting Logic - start
+  const selectedCell = (indexOfArray, value, highlight) => {
+    const className = getClassName(indexOfArray, value, highlight);
+    return (
+      <td
+        className={className}
+        key={indexOfArray}
+        onClick={() => setCellSelected(indexOfArray)}
+      >
+        {value}
+      </td>
+    );
+  };
+
+  const unselectedCell = (indexOfArray, value) => {
+    let className = 'game__cell';
+    if (value !== 0) {
+      if (initArray[indexOfArray] === 0) {
+        className = 'game__cell game__cell--userfilled';
+      } else {
+        className = 'game__cell game__cell--filled';
+      }
+    }
+
+    return (
+      <td
+        className={className}
+        key={indexOfArray}
+        onClick={() => setCellSelected(indexOfArray)}
+      >
+        {value ? value : ''}
+      </td>
+    );
+  };
 
   const _Cells = (indexOfArray, value, box, indx) => {
     if (editable[indexOfArray]) {
@@ -41,11 +92,7 @@ const GameSection = () => {
           }`}
           onClick={() => setCellSelected(indexOfArray)}
         >
-<<<<<<< HEAD
           {value === 0 ? ' ' : value}
-=======
-          {''}
->>>>>>> 💄 add style to cell
         </td>
       );
     }
@@ -55,6 +102,7 @@ const GameSection = () => {
       </td>
     );
   };
+
   return (
     <section className="game">
       <table className="game__board">
@@ -64,11 +112,17 @@ const GameSection = () => {
               <tr className="game__row" key={row}>
                 {rows.map((column, indx) => {
                   const indexOfArray = row * 9 + indx;
-                  const value = initArray[indexOfArray];
-                  if (editable[indexOfArray]) {
-                    return _Cells(indexOfArray, value, 'blank-box', indx);
+                  const value = gameArray[indexOfArray];
+
+                  if (cellSelected === indexOfArray) {
+                    return selectedCell(indexOfArray, value, 'highlight');
                   }
-                  return _Cells(indexOfArray, value, 'filled-box', indx);
+
+                  if (numberSelected === gameArray[indexOfArray]) {
+                    return selectedCell(indexOfArray, value, '');
+                  }
+
+                  return unselectedCell(indexOfArray, value);
                 })}
               </tr>
             );

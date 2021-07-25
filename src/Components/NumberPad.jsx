@@ -8,13 +8,16 @@ const NumberPad = () => {
     cellSelected,
     setInitArray,
     initArray,
+    gameArray,
+    setGameArray,
     setNumberSelected,
   } = useSudokuContext();
 
   const onClickNumber = (numberCLicked) => {
-    setInitArray(() => {
-      const valu = [...initArray];
-      valu[cellSelected] = numberCLicked;
+    setNumberSelected(Number(numberCLicked));
+    setGameArray(() => {
+      const valu = [...gameArray];
+      valu[cellSelected] = parseInt(numberCLicked);
       return valu;
     });
   };
