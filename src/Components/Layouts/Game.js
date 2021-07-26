@@ -8,12 +8,19 @@ import NumberPad from '../NumberPad';
 import { getQueAns } from '../../Utils/GetQueAns';
 import { useLocalStorage } from '../../hooks/useLocalStorage';
 
+import { useStopwatch } from 'react-timer-hook';
+
 const Game = () => {
   const { setInitArray, setGameArray, setAnsArray, setRewind } =
     useSudokuContext();
   const [value, setValue] = useLocalStorage('gameState', null);
 
+  const { seconds, minutes, hours, reset } = useStopwatch({
+    autoStart: true,
+  });
+
   const startGame = (isNewGame = false) => {
+    reset();
     if (isNewGame || !value) {
       const [quesArray, solvedArray] = getQueAns();
       setAnsArray(solvedArray);
@@ -43,6 +50,7 @@ const Game = () => {
             setRewind([]);
           }}
           saveToLocalStorage={setValue}
+          timerProps={{ hours, minutes, seconds }}
         />
       </div>
     </div>

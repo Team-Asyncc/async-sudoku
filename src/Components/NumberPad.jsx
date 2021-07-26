@@ -2,8 +2,9 @@ import React, { useEffect } from 'react';
 import { useSudokuContext } from '../context/SudokuContext';
 import '../styles/numberpad.scss';
 import { icons } from '../Utils/getIcons';
+import Timer from './Timer';
 
-const NumberPad = ({ onNewGameClick, saveToLocalStorage }) => {
+const NumberPad = ({ onNewGameClick, saveToLocalStorage, timerProps }) => {
   let {
     cellSelected,
     initArray,
@@ -74,6 +75,7 @@ const NumberPad = ({ onNewGameClick, saveToLocalStorage }) => {
 
   return (
     <div className="controls__container">
+      <Timer {...timerProps} />
       <button className="controls__btn" onClick={() => onNewGameClick()}>
         New Game
       </button>
