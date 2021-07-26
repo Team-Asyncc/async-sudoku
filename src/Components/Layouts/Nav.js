@@ -8,7 +8,7 @@ const Nav = () => {
       <header>
         <Link to="/">Sudoku</Link>
       </header>
-      <div>
+      <div className="learn">
         <Link to="/learn" className="learn-to-play-btn">
           Learn To Play
         </Link>
