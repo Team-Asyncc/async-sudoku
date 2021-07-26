@@ -1,14 +1,15 @@
 // variables
 $background-color: hsl(200, 6%, 9%) !global;
 $color-blue: hsl(210, 61%, 86%) !global;
-$color-grey: hsl(213, 29%, 39%) !global;
+$color-grey: hsl(39, 100%, 94%) !global;
+$color-border-grey: hsl(207, 52%, 35%) !global;
 $color-grey-light: hsl(213, 30%, 59%) !global;
 $color-grey-lighter: hsl(0, 0%, 0%) !global;
 $color-orange: hsl(36, 25%, 15%) !global;
 $color-orange-dark: hsl(35, 75%, 15%) !global;
 $color-orange-darker: hsl(33, 100%, 25%) !global;
-$color-red-light: hsl(0, 91%, 18%) !global;
-$color-green-light: hsl(140, 81%, 18%) !global;
+$color-red-light: hsla(0, 46%, 48%, 0.979) !global;
+$color-green-light: hsla(140, 55%, 36%, 0.87) !global;
 
 .container {
   max-width: 700px;
@@ -31,12 +32,12 @@ $color-green-light: hsl(140, 81%, 18%) !global;
   .game__board {
     font-size: 26px;
     margin: 30px 0;
-    border: 2px solid $color-grey;
+    border: 2px solid $color-border-grey;
     border-collapse: collapse;
 
     .game__row {
       &:nth-child(3n) {
-        border-bottom: 2px solid $color-grey;
+        border-bottom: 2px solid $color-border-grey;
       }
     }
   }
@@ -49,7 +50,7 @@ $color-green-light: hsl(140, 81%, 18%) !global;
   cursor: pointer;
 
   &:nth-child(3n) {
-    border-right: 2px solid $color-grey;
+    border-right: 2px solid $color-border-grey;
   }
 }
 
@@ -96,11 +97,11 @@ $color-green-light: hsl(140, 81%, 18%) !global;
 }
 
 .correct--number {
-  color: green !important;
+  color: $color-grey !important;
   background-color: $color-green-light !important;
 }
 
 .wrong--number {
-  color: crimson !important;
+  color: $color-grey !important;
   background-color: $color-red-light !important;
 }
