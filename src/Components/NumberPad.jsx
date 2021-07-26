@@ -1,12 +1,15 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSudokuContext } from '../context/SudokuContext';
 import '../styles/numberpad.scss';
 import { icons } from '../Utils/getIcons';
 
 import ReactTooltip from 'react-tooltip';
 import Timer from './Timer';
+import useWindowSize from '../hooks/useWindowSize';
 
 const NumberPad = ({ onNewGameClick, saveToLocalStorage, timerProps }) => {
+  const [width, height] = useWindowSize();
+  console.log(width);
   let {
     cellSelected,
     initArray,
@@ -93,57 +96,90 @@ const NumberPad = ({ onNewGameClick, saveToLocalStorage, timerProps }) => {
     return false;
   };
 
-  return (
-    <div className="controls__container">
-      <Timer {...timerProps} />
-      <button className="controls__btn" onClick={() => onNewGameClick()}>
-        New Game
-      </button>
-      <div className="controls__icons">
-        <img
-          src={icons.back}
-          height="40"
-          width="40"
-          alt="back"
-          onClick={Rewind}
-          data-tip="Rewind"
-          data-class="tooltip__special__class"
-        />
-        <img
-          src={icons.cross}
-          height="40"
-          width="40"
-          alt="back"
-          data-tip="Erase"
-          onClick={Erase}
-          data-class="tooltip__special__class"
-        />
-        <img
-          src={icons.bulb}
-          height="40"
-          width="40"
-          alt="back"
-          data-tip="Hint"
-          onClick={Hint}
-          data-class="tooltip__special__class"
-        />
+  if (width > 600) {
+    return (
+      <div className="controls__container">
+        <Timer {...timerProps} />
+        <button className="controls__btn" onClick={() => onNewGameClick()}>
+          New Game
+        </button>
+        <div className="controls__icons">
+          <img
+            src={icons.back}
+            height="40"
+            width="40"
+            alt="back"
+            onClick={Rewind}
+            data-tip="Rewind"
+            data-class="tooltip__special__class"
+          />
+          <img
+            src={icons.cross}
+            height="40"
+            width="40"
+            alt="back"
+            data-tip="Erase"
+            onClick={Erase}
+            data-class="tooltip__special__class"
+          />
+          <img
+            src={icons.bulb}
+            height="40"
+            width="40"
+            alt="back"
+            data-tip="Hint"
+            onClick={Hint}
+            data-class="tooltip__special__class"
+          />
+        </div>
+        <div className="status__numbers">
+          {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((number) => {
+            return (
+              <div
+                className="status__number"
+                key={number}
+                onClick={() => onClickNumber(number)}
+              >
+                {number}
+              </div>
+            );
+          })}
+        </div>
+        <ReactTooltip class="tooltip__special__class" effect="solid" />
       </div>
-      <div className="status__numbers">
-        {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((number) => {
-          return (
-            <div
-              className="status__number"
-              key={number}
-              onClick={() => onClickNumber(number)}
-            >
-              {number}
-            </div>
-          );
-        })}
+    );
+  } else {
+    return (
+      <div className="controls__container">
+        <div
+          style={{
+            display: 'flex',
+            justifyItems: 'stretch',
+            gap: '0.1rem',
+            marginTop: '2rem',
+            height: 'fit-content',
+            width: '100%',
+            padding: '1rem',
+            background: 'hsl(200, 6%, 9%)',
+            border: 'solid 3px hsl(210, 100%, 47%)',
+            borderRadius: '1rem',
+          }}
+        >
+          {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((number) => {
+            return (
+              <div
+                className="status__number"
+                key={number}
+                onClick={() => onClickNumber(number)}
+              >
+                {number}
+              </div>
+            );
+          })}
+        </div>
       </div>
-      <ReactTooltip class="tooltip__special__class" effect="solid" />
-    </div>
-  );
+    );
+  }
 };
 
 export default NumberPad;

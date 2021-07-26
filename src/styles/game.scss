@@ -19,7 +19,7 @@ $color-green-light: hsl(140, 81%, 18%) !global;
   .innercontainer {
     display: flex;
     gap: 1rem;
-    // flex-wrap: wrap;
+    flex-wrap: wrap;
     align-items: stretch;
     padding: 0 20px;
     color: $color-grey;
