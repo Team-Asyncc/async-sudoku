@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSudokuContext } from '../context/SudokuContext';
 import '../styles/numberpad.scss';
 
 import { icons } from '../Utils/getIcons';
 
-const NumberPad = () => {
+const NumberPad = ({ onNewGameClick, saveToLocalStorage }) => {
   let {
     cellSelected,
     initArray,
@@ -24,9 +24,14 @@ const NumberPad = () => {
     setGameArray(() => {
       const valu = [...gameArray];
       valu[cellSelected] = numberCLicked;
+      // saveToLocalStorage({ solved: ansArray, ques: valu, init: initArray });
       return valu;
     });
   };
+
+  useEffect(() => {
+    saveToLocalStorage({ solved: ansArray, ques: gameArray, init: initArray });
+  }, [gameArray, ansArray, initArray, saveToLocalStorage]);
 
   const _isSolved = () => {
     if (
@@ -41,7 +46,9 @@ const NumberPad = () => {
 
   return (
     <div className="controls__container">
-      <button className="controls__btn">New Game</button>
+      <button className="controls__btn" onClick={() => onNewGameClick()}>
+        New Game
+      </button>
       <div className="controls__icons">
         <img src={icons.back} height="40" width="40" alt="back" />
         <img src={icons.cross} height="40" width="40" alt="back" />
