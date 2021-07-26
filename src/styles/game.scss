@@ -1,14 +1,14 @@
 // variables
-$background-color: #fff !global;
-$color-blue: hsl(210, 88%, 56%) !global;
-$color-grey: hsl(213, 30%, 29%) !global;
+$background-color: hsl(200, 6%, 9%) !global;
+$color-blue: hsl(210, 61%, 86%) !global;
+$color-grey: hsl(213, 29%, 39%) !global;
 $color-grey-light: hsl(213, 30%, 59%) !global;
-$color-grey-lighter: hsl(213, 30%, 79%) !global;
-$color-orange: hsl(34, 26%, 89%) !global;
-$color-orange-dark: hsl(34, 76%, 89%) !global;
-$color-orange-darker: hsl(34, 100%, 72%) !global;
-$color-red-light: hsl(0, 93%, 84%) !global;
-$color-green-light: hsl(127, 83%, 84%) !global;
+$color-grey-lighter: hsl(0, 0%, 0%) !global;
+$color-orange: hsl(36, 25%, 15%) !global;
+$color-orange-dark: hsl(35, 75%, 15%) !global;
+$color-orange-darker: hsl(33, 100%, 25%) !global;
+$color-red-light: hsl(0, 91%, 18%) !global;
+$color-green-light: hsl(140, 81%, 18%) !global;
 
 .container {
   max-width: 700px;
@@ -53,16 +53,6 @@ $color-green-light: hsl(127, 83%, 84%) !global;
   }
 }
 
-// .filled-box {
-//   background-color: aqua;
-// }
-// .blank-box {
-//   background-color: blueviolet;
-// }
-// .selected-box {
-//   background-color: brown;
-// }
-
 .game__cell.game_cell--filled {
   color: $color-grey;
 }
@@ -106,7 +96,7 @@ $color-green-light: hsl(127, 83%, 84%) !global;
 }
 
 .correct--number {
-  color: darkgreen !important;
+  color: green !important;
   background-color: $color-green-light !important;
 }
 

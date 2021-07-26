@@ -1,14 +1,16 @@
 // variables
-$background-color: #fff !global;
-$color-blue: hsl(210, 88%, 56%) !global;
+$background-color: hsl(200, 6%, 9%) !global;
+
+$color-blue: hsl(210, 53%, 55%) !global;
 $color-grey: hsl(213, 30%, 29%) !global;
 $color-grey-light: hsl(213, 30%, 59%) !global;
-$color-grey-lighter: hsl(213, 30%, 79%) !global;
+$color-grey-lighter: hsl(212, 30%, 21%) !global;
 $color-orange: hsl(34, 26%, 89%) !global;
 $color-orange-dark: hsl(34, 76%, 89%) !global;
 $color-orange-darker: hsl(34, 100%, 72%) !global;
 $color-red-light: hsl(0, 93%, 84%) !global;
-$color-green-light: hsl(127, 83%, 84%) !global;
+$color-green-light: hsl(194, 98%, 24%) !global;
+$color-green: hsl(204, 56%, 53%) !global;
 
 .status__numbers {
   display: grid;
@@ -54,14 +56,17 @@ $color-green-light: hsl(127, 83%, 84%) !global;
   .controls__btn {
     padding: 20px 30px;
     border-radius: 5px;
-    background-color: #0072e3;
+    background-color: $color-green;
     border: none;
-    color: #fff;
+    color: $color-grey;
     font-size: 1.3rem;
     cursor: pointer;
-
+    &:hover {
+      opacity: 0.8;
+    }
     &:active {
-      background-color: #065baa;
+      background-color: $color-green-light;
+      color: rgba(255, 255, 255, 0.678);
     }
   }
 }
