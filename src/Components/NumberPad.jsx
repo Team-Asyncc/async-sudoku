@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { useSudokuContext } from '../context/SudokuContext';
 import '../styles/numberpad.scss';
-
 import { icons } from '../Utils/getIcons';
 
 const NumberPad = ({ onNewGameClick, saveToLocalStorage }) => {
@@ -13,20 +12,49 @@ const NumberPad = ({ onNewGameClick, saveToLocalStorage }) => {
     setNumberSelected,
     ansArray,
     setWon,
+    rewind,
+    setRewind,
   } = useSudokuContext();
 
+  //Rewind
+  const Rewind = () => {
+    if (rewind.length > 0) {
+      setGameArray(() => {
+        const valu = [...gameArray];
+        const lastRewind = rewind.slice(-1)[0];
+        valu[lastRewind.index] = lastRewind.value;
+        return valu;
+      });
+
+      setRewind(() => {
+        const valu = [...rewind];
+        valu.pop();
+        return valu;
+      });
+    }
+  };
+
+  const storeRewind = () => {
+    setRewind(() => {
+      const valu = [...rewind];
+      valu.push({ index: cellSelected, value: gameArray[cellSelected] });
+      return valu;
+    });
+  };
+  //rewind end
   const onClickNumber = (numberCLicked) => {
     if (initArray[cellSelected] !== 0) return;
     if (_isSolved()) {
       setWon(true);
     }
     setNumberSelected(Number(numberCLicked));
+    storeRewind();
     setGameArray(() => {
       const valu = [...gameArray];
       valu[cellSelected] = numberCLicked;
-      // saveToLocalStorage({ solved: ansArray, ques: valu, init: initArray });
       return valu;
     });
+    storeRewind();
   };
 
   useEffect(() => {
@@ -50,7 +78,13 @@ const NumberPad = ({ onNewGameClick, saveToLocalStorage }) => {
         New Game
       </button>
       <div className="controls__icons">
-        <img src={icons.back} height="40" width="40" alt="back" />
+        <img
+          src={icons.back}
+          height="40"
+          width="40"
+          alt="back"
+          onClick={Rewind}
+        />
         <img src={icons.cross} height="40" width="40" alt="back" />
         <img src={icons.bulb} height="40" width="40" alt="back" />
       </div>
