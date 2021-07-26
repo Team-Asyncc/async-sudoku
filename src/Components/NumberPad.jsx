@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSudokuContext } from '../context/SudokuContext';
 import '../styles/numberpad.scss';
 
@@ -24,10 +24,14 @@ const NumberPad = ({ onNewGameClick, saveToLocalStorage }) => {
     setGameArray(() => {
       const valu = [...gameArray];
       valu[cellSelected] = numberCLicked;
-      saveToLocalStorage({ solved: ansArray, ques: valu, init: initArray });
+      // saveToLocalStorage({ solved: ansArray, ques: valu, init: initArray });
       return valu;
     });
   };
+
+  useEffect(() => {
+    saveToLocalStorage({ solved: ansArray, ques: gameArray, init: initArray });
+  }, [gameArray, ansArray, initArray, saveToLocalStorage]);
 
   const _isSolved = () => {
     if (
