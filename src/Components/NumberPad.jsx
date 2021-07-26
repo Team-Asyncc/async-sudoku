@@ -6,7 +6,6 @@ import { icons } from '../Utils/getIcons';
 import ReactTooltip from 'react-tooltip';
 import Timer from './Timer';
 
-
 const NumberPad = ({ onNewGameClick, saveToLocalStorage, timerProps }) => {
   let {
     cellSelected,
@@ -108,6 +107,7 @@ const NumberPad = ({ onNewGameClick, saveToLocalStorage, timerProps }) => {
           alt="back"
           onClick={Rewind}
           data-tip="Rewind"
+          data-class="tooltip__special__class"
         />
         <img
           src={icons.cross}
@@ -116,6 +116,7 @@ const NumberPad = ({ onNewGameClick, saveToLocalStorage, timerProps }) => {
           alt="back"
           data-tip="Erase"
           onClick={Erase}
+          data-class="tooltip__special__class"
         />
         <img
           src={icons.bulb}
@@ -124,6 +125,7 @@ const NumberPad = ({ onNewGameClick, saveToLocalStorage, timerProps }) => {
           alt="back"
           data-tip="Hint"
           onClick={Hint}
+          data-class="tooltip__special__class"
         />
       </div>
       <div className="status__numbers">
@@ -139,7 +141,7 @@ const NumberPad = ({ onNewGameClick, saveToLocalStorage, timerProps }) => {
           );
         })}
       </div>
-      <ReactTooltip />
+      <ReactTooltip class="tooltip__special__class" effect="solid" />
     </div>
   );
 };
