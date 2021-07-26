@@ -9,6 +9,7 @@ export const SudokuProvider = ({ children }) => {
   let [timer, setTimer] = useState();
   let [cellSelected, setCellSelected] = useState(-1);
   let [initArray, setInitArray] = useState([]);
+  let [rewind, setRewind] = useState([{}]);
   let [won, setWon] = useState(false);
   let [ansArray, setAnsArray] = useState('wrong');
 
@@ -31,6 +32,8 @@ export const SudokuProvider = ({ children }) => {
         setWon,
         ansArray,
         setAnsArray,
+        rewind,
+        setRewind,
       }}
     >
       {children}
