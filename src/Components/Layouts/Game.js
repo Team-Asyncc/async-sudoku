@@ -6,15 +6,26 @@ import GameSection from './GameSection';
 import NumberPad from '../NumberPad';
 
 import { getQueAns } from '../../Utils/GetQueAns';
+import { useLocalStorage } from '../../hooks/useLocalStorage';
 
 const Game = () => {
   const { setInitArray, setGameArray, setAnsArray } = useSudokuContext();
+  const [value, setValue] = useLocalStorage('gameState', null);
 
-  const startGame = () => {
-    const [quesArray, solvedArray] = getQueAns();
-    setAnsArray(solvedArray);
-    setInitArray(quesArray);
-    setGameArray(quesArray);
+  const startGame = (isNewGame = false) => {
+    if (isNewGame || !value) {
+      const [quesArray, solvedArray] = getQueAns();
+      setAnsArray(solvedArray);
+      setInitArray(quesArray);
+      setGameArray(quesArray);
+      localStorage.removeItem('gameState');
+    } else {
+      const { solved, ques, init } = value;
+      console.log(solved);
+      setAnsArray(solved);
+      setInitArray(init);
+      setGameArray(ques);
+    }
   };
 
   useEffect(() => {
@@ -26,7 +37,12 @@ const Game = () => {
     <div className="container">
       <div className="innercontainer">
         <GameSection />
-        <NumberPad />
+        <NumberPad
+          onNewGameClick={() => {
+            startGame(true);
+          }}
+          saveToLocalStorage={setValue}
+        />
       </div>
     </div>
   );
