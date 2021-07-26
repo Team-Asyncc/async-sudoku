@@ -6,11 +6,11 @@ const Nav = () => {
   return (
     <nav>
       <header>
-        <Link to="/">Sudoku</Link>
+        <Link to="/">Sudoku 🖊</Link>
       </header>
       <div className="learn">
         <Link to="/learn" className="learn-to-play-btn">
-          Learn To Play
+          Learn To Play 🎓
         </Link>
       </div>
     </nav>
