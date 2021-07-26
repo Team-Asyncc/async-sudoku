@@ -2,7 +2,7 @@
 $background-color: hsl(200, 6%, 9%) !global;
 
 $color-blue: hsl(210, 53%, 55%) !global;
-$color-grey: hsl(213, 30%, 29%) !global;
+$color-grey: hsl(39, 100%, 94%) !global;
 $color-grey-light: hsl(213, 30%, 59%) !global;
 $color-grey-lighter: hsl(212, 30%, 21%) !global;
 $color-orange: hsl(34, 26%, 89%) !global;
@@ -11,6 +11,8 @@ $color-orange-darker: hsl(34, 100%, 72%) !global;
 $color-red-light: hsl(0, 93%, 84%) !global;
 $color-green-light: hsl(194, 98%, 24%) !global;
 $color-green: hsl(204, 56%, 53%) !global;
+$color-violet: hsl(264, 100%, 55%) !global;
+$color-violet-light: rgb(126, 40, 255) !global;
 
 .status__numbers {
   display: grid;
@@ -24,12 +26,13 @@ $color-green: hsl(204, 56%, 53%) !global;
   background: $background-color;
   border: solid 3px $color-blue;
   border-radius: 1rem;
+
+  font-family: 'Roboto', sans-serif;
 }
 
 .status__number {
   text-align: center;
-  color: $color-blue;
-  font-family: sans-serif;
+  color: $color-grey;
   font-size: 26px;
   padding: 12px 0;
   border-radius: 1rem;
@@ -54,9 +57,10 @@ $color-green: hsl(204, 56%, 53%) !global;
   margin-top: 29px;
 
   .controls__btn {
-    padding: 20px 30px;
+    margin-top: 0.2rem;
+    padding: 1rem 1.5rem;
     border-radius: 5px;
-    background-color: $color-green;
+    background-color: $color-violet;
     border: none;
     color: $color-grey;
     font-size: 1.3rem;
@@ -65,7 +69,7 @@ $color-green: hsl(204, 56%, 53%) !global;
       opacity: 0.8;
     }
     &:active {
-      background-color: $color-green-light;
+      background-color: $color-violet-light;
       color: rgba(255, 255, 255, 0.678);
     }
   }
