@@ -2,6 +2,8 @@ import React, { useEffect } from 'react';
 import { useSudokuContext } from '../context/SudokuContext';
 import '../styles/numberpad.scss';
 import { icons } from '../Utils/getIcons';
+
+import ReactTooltip from 'react-tooltip';
 import Timer from './Timer';
 
 const NumberPad = ({ onNewGameClick, saveToLocalStorage, timerProps }) => {
@@ -33,6 +35,24 @@ const NumberPad = ({ onNewGameClick, saveToLocalStorage, timerProps }) => {
         return valu;
       });
     }
+  };
+
+  //Erase Logic
+  const Erase = () => {
+    setGameArray(
+      gameArray.map((value, idx) => (idx === cellSelected ? 0 : value))
+    );
+    storeRewind();
+  };
+
+  //Hint Logic
+  const Hint = () => {
+    setGameArray(
+      gameArray.map((value, idx) =>
+        idx === cellSelected ? ansArray[cellSelected] : value
+      )
+    );
+    storeRewind();
   };
 
   const storeRewind = () => {
@@ -86,9 +106,27 @@ const NumberPad = ({ onNewGameClick, saveToLocalStorage, timerProps }) => {
           width="40"
           alt="back"
           onClick={Rewind}
+          data-tip="Rewind"
+          data-class="tooltip__special__class"
         />
-        <img src={icons.cross} height="40" width="40" alt="back" />
-        <img src={icons.bulb} height="40" width="40" alt="back" />
+        <img
+          src={icons.cross}
+          height="40"
+          width="40"
+          alt="back"
+          data-tip="Erase"
+          onClick={Erase}
+          data-class="tooltip__special__class"
+        />
+        <img
+          src={icons.bulb}
+          height="40"
+          width="40"
+          alt="back"
+          data-tip="Hint"
+          onClick={Hint}
+          data-class="tooltip__special__class"
+        />
       </div>
       <div className="status__numbers">
         {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((number) => {
@@ -103,6 +141,7 @@ const NumberPad = ({ onNewGameClick, saveToLocalStorage, timerProps }) => {
           );
         })}
       </div>
+      <ReactTooltip class="tooltip__special__class" effect="solid" />
     </div>
   );
 };
