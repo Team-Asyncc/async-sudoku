@@ -11,16 +11,17 @@ import { useLocalStorage } from '../../hooks/useLocalStorage';
 import { useStopwatch } from 'react-timer-hook';
 
 const Game = () => {
-  const { setInitArray, setGameArray, setAnsArray, setRewind } =
+  const { setInitArray, setGameArray, setAnsArray, setRewind, won, setWon } =
     useSudokuContext();
   const [value, setValue] = useLocalStorage('gameState', null);
 
-  const { seconds, minutes, hours, reset } = useStopwatch({
+  const { seconds, minutes, hours, reset, pause } = useStopwatch({
     autoStart: true,
   });
 
   const startGame = (isNewGame = false) => {
     reset();
+    setWon(false);
     if (isNewGame || !value) {
       const [quesArray, solvedArray] = getQueAns();
       setAnsArray(solvedArray);
@@ -42,6 +43,12 @@ const Game = () => {
 
   return (
     <div className="container">
+      {console.log(won)}
+      {won && (
+        <div className="won__container" onClick={() => setWon(false)}>
+          <h1>You Won 🎉</h1>
+        </div>
+      )}
       <div className="innercontainer">
         <GameSection />
         <NumberPad
@@ -50,7 +57,7 @@ const Game = () => {
             setRewind([]);
           }}
           saveToLocalStorage={setValue}
-          timerProps={{ hours, minutes, seconds }}
+          timerProps={{ hours, minutes, seconds, pause }}
         />
       </div>
     </div>

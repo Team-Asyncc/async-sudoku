@@ -54,6 +54,23 @@ $color-green-light: hsla(140, 55%, 36%, 0.87) !global;
   }
 }
 
+.won__container {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  top: -1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: whitesmoke;
+  background: rgba(255, 255, 255, 0.05);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(1.5px);
+  -webkit-backdrop-filter: blur(1.5px);
+  font-size: 2rem;
+}
+
 .game__cell.game_cell--filled {
   color: $color-grey;
 }

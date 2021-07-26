@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useSudokuContext } from '../context/SudokuContext';
 import '../styles/numberpad.scss';
 import { icons } from '../Utils/getIcons';
@@ -7,6 +7,8 @@ import ReactTooltip from 'react-tooltip';
 import Timer from './Timer';
 
 const NumberPad = ({ onNewGameClick, saveToLocalStorage, timerProps }) => {
+  const timerRef = useRef(timerProps);
+
   let {
     cellSelected,
     initArray,
@@ -65,9 +67,6 @@ const NumberPad = ({ onNewGameClick, saveToLocalStorage, timerProps }) => {
   //rewind end
   const onClickNumber = (numberCLicked) => {
     if (initArray[cellSelected] !== 0) return;
-    if (_isSolved()) {
-      setWon(true);
-    }
     setNumberSelected(Number(numberCLicked));
     storeRewind();
     setGameArray(() => {
@@ -79,19 +78,22 @@ const NumberPad = ({ onNewGameClick, saveToLocalStorage, timerProps }) => {
   };
 
   useEffect(() => {
+    const _isSolved = () => {
+      if (
+        gameArray.every(
+          (cell, cellIndex) => ansArray[cellIndex] === gameArray[cellIndex]
+        )
+      ) {
+        return true;
+      }
+      return false;
+    };
     saveToLocalStorage({ solved: ansArray, ques: gameArray, init: initArray });
-  }, [gameArray, ansArray, initArray, saveToLocalStorage]);
-
-  const _isSolved = () => {
-    if (
-      gameArray.every(
-        (cell, cellIndex) => ansArray[cellIndex] === gameArray[cellIndex]
-      )
-    ) {
-      return true;
+    if (_isSolved()) {
+      setWon(true);
+      timerRef.current.pause();
     }
-    return false;
-  };
+  }, [gameArray, ansArray, initArray, saveToLocalStorage, setWon]);
 
   return (
     <div className="controls__container">
@@ -124,7 +126,9 @@ const NumberPad = ({ onNewGameClick, saveToLocalStorage, timerProps }) => {
           width="40"
           alt="back"
           data-tip="Hint"
-          onClick={Hint}
+          onClick={() => {
+            Hint();
+          }}
           data-class="tooltip__special__class"
         />
       </div>
