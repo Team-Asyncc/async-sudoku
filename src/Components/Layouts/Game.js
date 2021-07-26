@@ -9,7 +9,8 @@ import { getQueAns } from '../../Utils/GetQueAns';
 import { useLocalStorage } from '../../hooks/useLocalStorage';
 
 const Game = () => {
-  const { setInitArray, setGameArray, setAnsArray } = useSudokuContext();
+  const { setInitArray, setGameArray, setAnsArray, setRewind } =
+    useSudokuContext();
   const [value, setValue] = useLocalStorage('gameState', null);
 
   const startGame = (isNewGame = false) => {
@@ -21,7 +22,6 @@ const Game = () => {
       localStorage.removeItem('gameState');
     } else {
       const { solved, ques, init } = value;
-      console.log(solved);
       setAnsArray(solved);
       setInitArray(init);
       setGameArray(ques);
@@ -40,6 +40,7 @@ const Game = () => {
         <NumberPad
           onNewGameClick={() => {
             startGame(true);
+            setRewind([]);
           }}
           saveToLocalStorage={setValue}
         />
